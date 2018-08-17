@@ -52,8 +52,8 @@ public class UserServiceTest {
 
         //then
         UserServiceImpl userService = new UserServiceImpl(users);
-        userService.removeUser(0);
-        users.remove(0);
+        userService.removeUserById(1l);
+        users.remove(admin);
         List<User> usersFromTestClass = userService.getAllUsers();
 
 
