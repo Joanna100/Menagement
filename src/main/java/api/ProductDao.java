@@ -2,6 +2,8 @@ package api;
 
 import entity.Product;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
 public interface ProductDao {
@@ -12,8 +14,8 @@ public interface ProductDao {
     void removeProductById(Long productId);
     void removeProductByName(String productName);
 
-    List<Product> getAllProducts();
-    Product getProductById(Long productId);
-    Product getProductByProductName(String productName);
+    List<Product> getAllProducts() throws IOException;
+    Product getProductById(Long productId) throws IOException;
+    Product getProductByProductName(String productName) throws IOException;
 
 }

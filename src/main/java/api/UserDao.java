@@ -2,11 +2,12 @@ package api;
 
 import entity.User;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 
 public interface UserDao {
 
-    void saveUser(User user);
+    void saveUser(User user) throws FileNotFoundException;
     void saveUsers(List<User> users);
 
     void removeUserById(Long userId);
