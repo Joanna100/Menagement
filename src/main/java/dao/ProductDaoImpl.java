@@ -3,8 +3,10 @@ package dao;
 import api.ProductDao;
 import entity.Product;
 import entity.parser.ProductParser;
+import utils.FileUtils;
 
 import java.io.*;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,10 +15,12 @@ public class ProductDaoImpl implements ProductDao {
     private final String fileName;
     private final String productType;
 
-    public ProductDaoImpl(String fileName, String productType) {
+    public ProductDaoImpl(String fileName, String productType) throws IOException {
         this.fileName=fileName;
         this.productType=productType;
+        FileUtils.createNewFile(fileName);
     }
+
 
     public void saveProduct(Product product) throws IOException {
         List<Product> products = getAllProducts();

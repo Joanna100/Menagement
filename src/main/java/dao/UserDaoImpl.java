@@ -3,6 +3,7 @@ package dao;
 import api.UserDao;
 import entity.User;
 import entity.parser.UserParser;
+import utils.FileUtils;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -13,8 +14,9 @@ public class UserDaoImpl implements UserDao {
 
     private final String fileName;
 
-    public UserDaoImpl(String fileName) {
+    public UserDaoImpl(String fileName) throws IOException {
         this.fileName=fileName;
+        FileUtils.createNewFile(fileName);
     }
 
     public void saveUser(User user) throws IOException {
