@@ -66,9 +66,8 @@ public class UserDaoImpl implements UserDao {
         String readLine = bufferedReader.readLine();
         while(readLine != null) {
             User user = UserParser.stringToUser(readLine);
-            if (user != null) {
-                users.add(user);
-            }
+            users.add(user);
+
         }
 
         return users;
