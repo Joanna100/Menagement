@@ -36,15 +36,6 @@ public class ProductServiceImpl implements ProductService {
         return null;
     }
 
-    public boolean isProductOnWarehouse(String productName) {
-        for(Product product : products) {
-            if (isProductExist(productName) && product.getProductCount() > 0) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     public boolean isProductExist(String productName) {
         for(Product product : products) {
             if (product.getProductName().equals(productName)) {
@@ -62,4 +53,14 @@ public class ProductServiceImpl implements ProductService {
         }
         return false;
     }
+
+    public boolean isProductOnWarehouse(String productName) {
+        for(Product product : products) {
+            if (isProductExist(productName) && product.getProductCount() > 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

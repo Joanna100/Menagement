@@ -29,6 +29,7 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     public void saveProducts(List<Product> products) throws FileNotFoundException {
+        FileUtils.clearFile(fileName);
         PrintWriter printWriter = new PrintWriter(new FileOutputStream(fileName, true));
         for(Product product : products) {
             printWriter.write(product.toString() + "\n");
@@ -73,6 +74,7 @@ public class ProductDaoImpl implements ProductDao {
                 products.add(product);
             }
         }
+        bufferedReader.close();
 
         return products;
     }
