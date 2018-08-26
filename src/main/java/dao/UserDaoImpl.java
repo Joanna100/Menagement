@@ -12,11 +12,19 @@ import java.util.List;
 public class UserDaoImpl implements UserDao {
 
 
-    private final String fileName;
+    private static final String fileName = "users.data";
+    private static UserDaoImpl instance = null;
 
-    public UserDaoImpl(String fileName) throws IOException {
-        this.fileName=fileName;
+    private UserDaoImpl() throws IOException {
         FileUtils.createNewFile(fileName);
+    }
+
+    public UserDaoImpl getInstance() throws IOException {
+        if (instance == null) {
+            instance = new UserDaoImpl();
+        }
+
+        return instance;
     }
 
     public void saveUser(User user) throws IOException {
@@ -31,6 +39,7 @@ public class UserDaoImpl implements UserDao {
             printWriter.write(user.toString() + "\n");
         }
         printWriter.close();
+
     }
 
     public void removeUserById(Long userId) throws IOException {
