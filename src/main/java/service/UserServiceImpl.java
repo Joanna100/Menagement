@@ -8,14 +8,22 @@ import java.util.List;
 
 public class UserServiceImpl implements UserService {
 
-    List<User> users;
+    private List<User> users;
+    private static UserServiceImpl instance = null;
 
-    public UserServiceImpl() {
+    private UserServiceImpl() {
         this.users = new ArrayList<User>();
     }
 
-    public UserServiceImpl(List<User> users) {
-        this.users = users;
+    public static UserServiceImpl getInstance() {
+        if (instance == null) {
+            instance = new UserServiceImpl();
+        }
+        return instance;
+    }
+
+    public void setUsersList(List<User> usersList) {
+        this.users = usersList;
     }
 
     public List<User> getAllUsers() {

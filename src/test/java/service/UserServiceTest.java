@@ -5,6 +5,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class UserServiceTest {
@@ -17,7 +18,8 @@ public class UserServiceTest {
         users.add(new User(2l, "pablo", "admin"));
 
         //then
-        UserServiceImpl userService = new UserServiceImpl(users);
+        UserServiceImpl userService = UserServiceImpl.getInstance();
+        userService.setUsersList(users);
         List<User> usersFromTestClass = userService.getAllUsers();
 
         //expected
@@ -33,7 +35,8 @@ public class UserServiceTest {
         users.add(user);
 
         //then
-        UserServiceImpl userService = new UserServiceImpl();
+        UserServiceImpl userService = UserServiceImpl.getInstance();
+        userService.setUsersList(new LinkedList<User>());
         userService.addUser(user);
         List<User> usersFromTestClass = userService.getAllUsers();
 
@@ -51,7 +54,8 @@ public class UserServiceTest {
         users.add(pablo);
 
         //then
-        UserServiceImpl userService = new UserServiceImpl(users);
+        UserServiceImpl userService = UserServiceImpl.getInstance();
+        userService.setUsersList(users);
         userService.removeUserById(1l);
         users.remove(admin);
         List<User> usersFromTestClass = userService.getAllUsers();
