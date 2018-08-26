@@ -29,7 +29,7 @@ public class UserValidator {
         return instance;
     }
 
-    public void validationUser(User user) throws UserLoginAlreadyExistException, UserShortLengthLoginException, UserShortLengthPasswordException {
+    public boolean isValidate(User user) throws UserLoginAlreadyExistException, UserShortLengthLoginException, UserShortLengthPasswordException {
         if (isPasswordLengthEnough(user.getPassword()))
             throw new UserShortLengthPasswordException("Password is too short.");
 
@@ -38,6 +38,8 @@ public class UserValidator {
 
         if (isLoginAlreadyExist(user.getLogin()))
             throw new UserLoginAlreadyExistException("User with this login already exists.");
+
+        return true;
     }
 
     private boolean isPasswordLengthEnough(String password) {

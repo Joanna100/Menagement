@@ -1,18 +1,25 @@
 package service;
 
+import api.UserDao;
 import api.UserService;
+import dao.UserDaoImpl;
 import entity.User;
+import exception.UserLoginAlreadyExistException;
+import exception.UserShortLengthLoginException;
+import exception.UserShortLengthPasswordException;
+import validator.UserValidator;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class UserServiceImpl implements UserService {
 
-    private List<User> users;
     private static UserServiceImpl instance = null;
+    private UserDao userDao = UserDaoImpl.getInstance();
+    private UserValidator userValidator = UserValidator.getInstance();
 
     private UserServiceImpl() {
-        this.users = new ArrayList<User>();
     }
 
     public static UserServiceImpl getInstance() {
@@ -22,30 +29,19 @@ public class UserServiceImpl implements UserService {
         return instance;
     }
 
-    public void setUsersList(List<User> usersList) {
-        this.users = usersList;
+    public List<User> getAllUsers() throws IOException {
+        return userDao.getAllUsers();
     }
 
-    public List<User> getAllUsers() {
-        return users;
-    }
-
-    public void addUser(User user) {
-        users.add(user);
-    }
-
-    public void removeUserById(Long userId) {
-        for(int i=0;i<users.size();i++){
-            //wyciągnięcie i-tego usera z listy
-            User userFromList = users.get(i);
-            //jeżeli ID usera z listy jest równe podanemu userId do usunięcia
-            if (userFromList.getId() == userId) {
-                //to usuń tego usera z pod i-tego indexu
-                users.remove(i);
-                // i przerwij pętle w końcu user już został usunięty.
-                break;
-            }
+    public void addUser(User user) throws IOException, UserShortLengthPasswordException, UserLoginAlreadyExistException, UserShortLengthLoginException {
+        if (userValidator.isValidate(user)) {
+            userDao.saveUser(user);
         }
     }
+
+    public void removeUserById(Long userId) throws IOException {
+        userDao.removeUserById(userId);
+    }
+
 
 }
