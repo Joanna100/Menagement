@@ -8,14 +8,23 @@ import java.util.List;
 
 public class ProductServiceImpl implements ProductService {
 
-    List<Product> products;
+    private List<Product> products;
+    private static ProductServiceImpl instance = null;
 
-    public ProductServiceImpl() {
+    private ProductServiceImpl() {
         products = new ArrayList<Product>();
     }
 
-    public ProductServiceImpl(List<Product> products) {
-        this.products=products;
+    public static ProductServiceImpl getInstance() {
+        if (instance == null) {
+            instance = new ProductServiceImpl();
+        }
+
+        return instance;
+    }
+
+    public void setProductsList(List<Product> productsList) {
+        this.products = productsList;
     }
 
     public List<Product> getAllProducts() {

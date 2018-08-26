@@ -19,7 +19,7 @@ public class UserDaoImpl implements UserDao {
         FileUtils.createNewFile(fileName);
     }
 
-    public UserDaoImpl getInstance() throws IOException {
+    public static UserDaoImpl getInstance() throws IOException {
         if (instance == null) {
             instance = new UserDaoImpl();
         }

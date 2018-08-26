@@ -24,7 +24,7 @@ public class Main {
         ProductDao productBootsDao = new ProductDaoImpl("boots", "BOOTS");
         productBootsDao.saveProduct(boots);
 
-        UserDao userDao = new UserDaoImpl("users");
+        UserDao userDao = UserDaoImpl.getInstance();
         userDao.saveUser(user);
     }
 }
