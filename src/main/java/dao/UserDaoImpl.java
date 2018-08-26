@@ -15,11 +15,17 @@ public class UserDaoImpl implements UserDao {
     private static final String fileName = "users.data";
     private static UserDaoImpl instance = null;
 
-    private UserDaoImpl() throws IOException {
-        FileUtils.createNewFile(fileName);
+    private UserDaoImpl() {
+        try {
+            FileUtils.createNewFile(fileName);
+        } catch (IOException e) {
+            System.out.println("Error with file path");
+            // exit zamyka całą aplikację
+            System.exit(-1);
+        }
     }
 
-    public static UserDaoImpl getInstance() throws IOException {
+    public static UserDaoImpl getInstance() {
         if (instance == null) {
             instance = new UserDaoImpl();
         }

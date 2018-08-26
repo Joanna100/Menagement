@@ -6,7 +6,6 @@ import entity.parser.ProductParser;
 import utils.FileUtils;
 
 import java.io.*;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
