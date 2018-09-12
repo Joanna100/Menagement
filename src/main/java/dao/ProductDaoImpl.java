@@ -76,6 +76,7 @@ public class ProductDaoImpl implements ProductDao {
             if (product != null) {
                 products.add(product);
             }
+            readLine = bufferedReader.readLine();
         }
         bufferedReader.close();
 

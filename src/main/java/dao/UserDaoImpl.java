@@ -82,7 +82,7 @@ public class UserDaoImpl implements UserDao {
         while(readLine != null) {
             User user = UserParser.stringToUser(readLine);
             users.add(user);
-
+            readLine = bufferedReader.readLine();
         }
 
         return users;
