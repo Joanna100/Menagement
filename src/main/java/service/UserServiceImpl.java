@@ -33,14 +33,16 @@ public class UserServiceImpl implements UserService {
         return userDao.getAllUsers();
     }
 
-    public void addUser(User user) {
+    public boolean addUser(User user) {
         try {
             if (userValidator.isValidate(user)) {
                 userDao.saveUser(user);
+                return true;
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+        return false;
     }
 
     public void removeUserById(Long userId) throws IOException {
@@ -62,19 +64,37 @@ public class UserServiceImpl implements UserService {
         return null;
     }
 
-    public User getUserByLogin(String login) throws IOException {
-        List<User> users = getAllUsers();
+    public User getUserByLogin(String login) {
+        List<User> users = null;
 
-        for (User user : users
-                ) {
-            boolean isFoundUser = user.getLogin().equals(login);
-            if (isFoundUser) {
-                return user;
+        try {
+            users = getAllUsers();
+            for (User user : users
+                    ) {
+                boolean isFoundUser = user.getLogin().equals(login);
+                if (isFoundUser) {
+                    return user;
+                }
+
             }
-
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
         return null;
+    }
+
+    public boolean isCorrectLoginAndPassword(User user) {
+        User foundUser = getUserByLogin(user.getLogin());
+
+        if (foundUser == null) {
+            return false;
+        }
+
+        boolean isCorrectLogin = foundUser.getLogin().equals(user.getLogin());
+        boolean isCorrectPass = foundUser.getPassword().equals(user.getPassword());
+
+        return isCorrectLogin && isCorrectPass;
     }
 
 

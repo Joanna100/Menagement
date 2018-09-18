@@ -111,14 +111,17 @@ public class ProductServiceImpl implements ProductService {
         return false;
     }
 
-    public void saveProduct(Product product) {
+    public boolean saveProduct(Product product) {
         try {
             if (productValidator.isValidate(product)) {
                 productDao.saveProduct(product);
+                return true;
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+
+        return true;
     }
 
 }
