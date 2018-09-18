@@ -3,6 +3,7 @@ package entity;
 public class Product {
 
     public final static String PRODUCT_SEPARATOR = "#";
+    public final static char PRODUCT_TYPE = 'P';
 
     private Long id;
     private String productName;
@@ -52,9 +53,12 @@ public class Product {
         return productCount;
     }
 
+    protected String getBasicProductString() {
+        return id + PRODUCT_SEPARATOR + productName + PRODUCT_SEPARATOR + price + PRODUCT_SEPARATOR + weight + PRODUCT_SEPARATOR + color + PRODUCT_SEPARATOR + productCount;
+    }
 
     @Override
     public String toString() {
-        return id + PRODUCT_SEPARATOR + productName + PRODUCT_SEPARATOR + price + PRODUCT_SEPARATOR + weight + PRODUCT_SEPARATOR + color + PRODUCT_SEPARATOR + productCount;
+        return PRODUCT_TYPE + PRODUCT_SEPARATOR + getBasicProductString();
     }
 }
