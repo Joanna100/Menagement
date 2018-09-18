@@ -17,19 +17,15 @@ public class UserRegisterLoginFacadeImpl implements UserRegisterLoginFacade {
         if (instance == null) {
             instance = new UserRegisterLoginFacadeImpl();
         }
-
         return instance;
     }
 
     public boolean registerUser(User user) {
-        if (userService.addUser(user)) {
-            return true;
-        }
-        return false;
+        return userService.addUser(user);
     }
 
-    public boolean loginUser(User user) {
-        if (userService.isCorrectLoginAndPassword(user)) {
+    public boolean loginUser(String login, String password) {
+        if (userService.isCorrectLoginAndPassword(login, password)) {
             return true;
         }
 
