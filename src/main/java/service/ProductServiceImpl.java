@@ -11,7 +11,7 @@ import java.util.List;
 public class ProductServiceImpl implements ProductService {
 
     private static ProductServiceImpl instance = null;
-    private ProductDao productDao = new ProductDaoImpl("products.data");
+    private ProductDao productDao = ProductDaoImpl.getInstance();
 
     private ProductServiceImpl() {
     }
@@ -33,14 +33,42 @@ public class ProductServiceImpl implements ProductService {
     }
 
     public Product getProductByProductName(String productName) throws IOException {
-        return productDao.getProductByProductName(productName);
+        List<Product> products = getAllProducts();
+
+        for (Product product : products
+                ) {
+            boolean isFoundProduct = product.getProductName().equals(productName);
+            if (isFoundProduct) {
+                return product;
+            }
+
+        }
+
+        return null;
     }
+
+    public Product getProductById(Long productId) throws IOException {
+        List<Product> products = getAllProducts();
+
+
+        for (Product product : products
+                ) {
+            boolean isFoundProduct = product.getId().equals(productId);
+            if (isFoundProduct) {
+                return product;
+            }
+
+        }
+
+        return null;
+    }
+
 
     public boolean isProductExist(String productName) {
        Product product = null;
 
        try {
-           product = productDao.getProductByProductName(productName);
+           product = getProductByProductName(productName);
        } catch (IOException e) {
            e.printStackTrace();
        }
@@ -54,7 +82,7 @@ public class ProductServiceImpl implements ProductService {
         Product product = null;
 
         try {
-            product = productDao.getProductById(productId);
+            product = getProductById(productId);
         } catch (IOException e) {
             e.printStackTrace();
         }

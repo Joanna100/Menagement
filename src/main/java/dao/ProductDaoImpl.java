@@ -11,15 +11,23 @@ import java.util.List;
 
 public class ProductDaoImpl implements ProductDao {
 
-    private final String fileName;
+    private static final String fileName = "products.data";
+    private static ProductDao instance = null;
 
-    public ProductDaoImpl(String fileName) {
-        this.fileName=fileName;
+    private ProductDaoImpl() {
         try {
             FileUtils.createNewFile(fileName);
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static ProductDao getInstance() {
+        if (instance == null) {
+            instance = new ProductDaoImpl();
+        }
+
+        return instance;
     }
 
 
@@ -81,33 +89,5 @@ public class ProductDaoImpl implements ProductDao {
         return products;
     }
 
-    public Product getProductById(Long productId) throws IOException {
-        List<Product> products = getAllProducts();
 
-        for (Product product : products
-             ) {
-            boolean isFoundProduct = product.getId().equals(productId);
-            if (isFoundProduct) {
-                return product;
-            }
-
-        }
-
-        return null;
-    }
-
-    public Product getProductByProductName(String productName) throws IOException {
-        List<Product> products = getAllProducts();
-
-        for (Product product : products
-                ) {
-            boolean isFoundProduct = product.getProductName().equals(productName);
-            if (isFoundProduct) {
-                return product;
-            }
-
-        }
-
-        return null;
-    }
 }
