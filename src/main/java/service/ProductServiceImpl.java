@@ -105,4 +105,8 @@ public class ProductServiceImpl implements ProductService {
         return false;
     }
 
+    public void saveProduct(Product product) {
+
+    }
+
 }

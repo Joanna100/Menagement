@@ -1,11 +1,13 @@
 package validator;
 
 import api.UserDao;
+import api.UserService;
 import dao.UserDaoImpl;
 import entity.User;
 import exception.UserLoginAlreadyExistException;
 import exception.UserShortLengthLoginException;
 import exception.UserShortLengthPasswordException;
+import service.UserServiceImpl;
 
 import java.io.IOException;
 
@@ -15,7 +17,7 @@ public class UserValidator {
     private final int MIN_LENGTH_LOGIN = 4;
 
     private static UserValidator instance = null;
-    private UserDao userDao = UserDaoImpl.getInstance();
+    private UserService userService = UserServiceImpl.getInstance();
 
     private UserValidator() {
 
@@ -53,7 +55,7 @@ public class UserValidator {
     private boolean isLoginAlreadyExist(String login) {
         User user = null;
         try {
-            user = userDao.getUserByLogin(login);
+            user = userService.getUserByLogin(login);
         } catch (IOException e) {
             e.printStackTrace();
         }
