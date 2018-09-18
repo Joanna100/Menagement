@@ -24,22 +24,18 @@ public class ProductValidator {
     public boolean isValidate(Product product) throws ProductNameEmptyException, ProductWeightNoPositiveException, ProductCountNegativeException, ProductPriceNoPositiveException {
         if (isPricePositive(product.getPrice())) {
             throw new ProductPriceNoPositiveException("Product price is no positive.");
-            return false;
         }
 
         if (isCountNoNegative(product.getProductCount())) {
             throw new ProductCountNegativeException("Product count is less than 0.");
-            return false;
         }
 
         if (isWeightPositive(product.getWeight())) {
             throw new ProductWeightNoPositiveException("Product weight is less or equals 0.");
-            return false;
         }
 
         if (isNameNoEmpty(product.getProductName())) {
             throw new ProductNameEmptyException("Product name cannot be empty.");
-            return false;
         }
 
         return true;

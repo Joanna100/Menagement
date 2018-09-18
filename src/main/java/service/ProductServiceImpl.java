@@ -4,6 +4,11 @@ import api.ProductDao;
 import api.ProductService;
 import dao.ProductDaoImpl;
 import entity.Product;
+import exception.ProductCountNegativeException;
+import exception.ProductNameEmptyException;
+import exception.ProductPriceNoPositiveException;
+import exception.ProductWeightNoPositiveException;
+import validator.ProductValidator;
 
 import java.io.IOException;
 import java.util.List;
@@ -12,6 +17,7 @@ public class ProductServiceImpl implements ProductService {
 
     private static ProductServiceImpl instance = null;
     private ProductDao productDao = ProductDaoImpl.getInstance();
+    private ProductValidator productValidator = ProductValidator.getInstance();
 
     private ProductServiceImpl() {
     }
@@ -106,7 +112,13 @@ public class ProductServiceImpl implements ProductService {
     }
 
     public void saveProduct(Product product) {
-
+        try {
+            if (productValidator.isValidate(product)) {
+                productDao.saveProduct(product);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
 }
