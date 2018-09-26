@@ -1,5 +1,9 @@
 package entity;
 
+import entity.enums.Color;
+
+import java.util.EnumSet;
+
 public class Product {
 
     public final static String PRODUCT_SEPARATOR = "#";
@@ -9,16 +13,16 @@ public class Product {
     private String productName;
     private Float price;
     private Float weight;
-    private String color;
+    private EnumSet<Color> colors;
     private Integer productCount;
 
-    public Product(Long id, String productName, Float price, Float weight, String color, Integer productCount) {
+    public Product(Long id, String productName, Float price, Float weight, EnumSet<Color> colors, Integer productCount) {
         this.id = id;
         this.productName = productName;
         this.price = price;
         this.weight = weight;
-        this.color = color;
-        this.productCount=productCount;
+        this.colors = colors;
+        this.productCount = productCount;
     }
 
     public void setPrice(Float price) {
@@ -45,8 +49,8 @@ public class Product {
         return weight;
     }
 
-    public String getColor() {
-        return color;
+    public EnumSet<Color> getColors() {
+        return colors;
     }
 
     public Integer getProductCount() {
@@ -54,7 +58,7 @@ public class Product {
     }
 
     protected String getBasicProductString() {
-        return id + PRODUCT_SEPARATOR + productName + PRODUCT_SEPARATOR + price + PRODUCT_SEPARATOR + weight + PRODUCT_SEPARATOR + color + PRODUCT_SEPARATOR + productCount;
+        return id + PRODUCT_SEPARATOR + productName + PRODUCT_SEPARATOR + price + PRODUCT_SEPARATOR + weight + PRODUCT_SEPARATOR + colors + PRODUCT_SEPARATOR + productCount;
     }
 
     @Override
