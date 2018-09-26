@@ -1,14 +1,12 @@
 package entity;
 
 import entity.enums.Color;
+import entity.enums.ProductSeparators;
 
 import java.util.EnumSet;
 
+
 public class Product {
-
-    public final static String PRODUCT_SEPARATOR = "#";
-    public final static char PRODUCT_TYPE = 'P';
-
     private Long id;
     private String productName;
     private Float price;
@@ -58,11 +56,11 @@ public class Product {
     }
 
     protected String getBasicProductString() {
-        return id + PRODUCT_SEPARATOR + productName + PRODUCT_SEPARATOR + price + PRODUCT_SEPARATOR + weight + PRODUCT_SEPARATOR + colors + PRODUCT_SEPARATOR + productCount;
+        return id + ProductSeparators.PRODUCT_SEPARATOR.toString() + productName + ProductSeparators.PRODUCT_SEPARATOR.toString() + price + ProductSeparators.PRODUCT_SEPARATOR.toString() + weight + ProductSeparators.PRODUCT_SEPARATOR.toString() + colors + ProductSeparators.PRODUCT_SEPARATOR.toString() + productCount;
     }
 
     @Override
     public String toString() {
-        return PRODUCT_TYPE + PRODUCT_SEPARATOR + getBasicProductString();
+        return ProductSeparators.PRODUCT_ID + ProductSeparators.PRODUCT_SEPARATOR.toString() + getBasicProductString();
     }
 }

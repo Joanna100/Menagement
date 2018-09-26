@@ -1,13 +1,12 @@
 package entity;
 
 import entity.enums.Color;
+import entity.enums.ProductSeparators;
 import entity.enums.SkinType;
 
 import java.util.EnumSet;
 
 public class Boots extends Product {
-
-    public final static char PRODUCT_TYPE = 'B';
 
     private Integer size;
     private SkinType skinType;
@@ -28,6 +27,6 @@ public class Boots extends Product {
 
     @Override
     public String toString() {
-        return PRODUCT_TYPE + PRODUCT_SEPARATOR + getBasicProductString() + PRODUCT_SEPARATOR + size + PRODUCT_SEPARATOR + skinType;
+        return ProductSeparators.BOOTS_ID + ProductSeparators.PRODUCT_SEPARATOR.toString() + getBasicProductString() + ProductSeparators.PRODUCT_SEPARATOR.toString() + size + ProductSeparators.PRODUCT_SEPARATOR.toString() + skinType;
     }
 }

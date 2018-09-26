@@ -2,13 +2,11 @@ package entity;
 
 import entity.enums.Color;
 import entity.enums.Material;
+import entity.enums.ProductSeparators;
 
 import java.util.EnumSet;
 
 public class Cloth extends Product {
-
-    public final static char PRODUCT_TYPE = 'C';
-
     private String size;
     private Material material;
 
@@ -29,6 +27,6 @@ public class Cloth extends Product {
 
     @Override
     public String toString() {
-        return PRODUCT_TYPE + PRODUCT_SEPARATOR + getBasicProductString() + PRODUCT_SEPARATOR + size + PRODUCT_SEPARATOR + material;
+        return ProductSeparators.ClOTH_ID + ProductSeparators.PRODUCT_SEPARATOR.toString() + getBasicProductString() + ProductSeparators.PRODUCT_SEPARATOR.toString() + size + ProductSeparators.PRODUCT_SEPARATOR.toString() + material;
     }
 }
