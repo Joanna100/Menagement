@@ -4,6 +4,7 @@ import entity.Boots;
 import entity.Cloth;
 import entity.Product;
 import entity.enums.Color;
+import entity.enums.Material;
 import entity.enums.ProductSeparators;
 import entity.enums.SkinType;
 
@@ -53,7 +54,7 @@ public class ProductParser {
         Color color = ColorParser.parseStrToColor(productInformations[5]);
         Integer productCount = Integer.parseInt(productInformations[6]);
         String size = productInformations[7];
-        String material = productInformations[8];
+        Material material = MaterialParser.parseStrToMaterial(productInformations[8]);
 
         return new Cloth(id, productName, price, weight, color, productCount, size, material);
     }
