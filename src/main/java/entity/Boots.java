@@ -4,15 +4,14 @@ import entity.enums.Color;
 import entity.enums.ProductSeparators;
 import entity.enums.SkinType;
 
-import java.util.EnumSet;
 
 public class Boots extends Product {
 
     private Integer size;
     private SkinType skinType;
 
-    public Boots(Long id, String productName, Float price, Float weight, EnumSet<Color> colors, Integer productCount, Integer size, SkinType skinType) {
-        super(id, productName, price, weight, colors, productCount);
+    public Boots(Long id, String productName, Float price, Float weight, Color color, Integer productCount, Integer size, SkinType skinType) {
+        super(id, productName, price, weight, color, productCount);
         this.size = size;
         this.skinType = skinType;
     }
