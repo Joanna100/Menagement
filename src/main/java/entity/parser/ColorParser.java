@@ -4,7 +4,9 @@ import entity.enums.Color;
 
 public class ColorParser {
 
-    public static Color parseStrToColor(String color) {
+    public static Color parseStrToColor(String str) {
+        String color = str.toUpperCase();
+
         if (color.equals("RED")) {
             return Color.RED;
         } else if (color.equals("BLUE")) {
