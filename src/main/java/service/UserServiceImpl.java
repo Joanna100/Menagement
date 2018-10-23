@@ -29,25 +29,23 @@ public class UserServiceImpl implements UserService {
         return instance;
     }
 
-    public List<User> getAllUsers() throws IOException {
+    public List<User> getAllUsers() {
         return userDao.getAllUsers();
     }
 
-    public boolean addUser(User user) {
-        try {
-            if (isLoginAlreadyExist(user.getLogin())) {
-                throw new UserLoginAlreadyExistException();
-            }
-
-            if (userValidator.isValidate(user)) {
-                userDao.saveUser(user);
-                return true;
-            }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+    public boolean addUser(User user) throws UserLoginAlreadyExistException, UserShortLengthLoginException, UserShortLengthPasswordException {
+        if (isLoginAlreadyExist(user.getLogin())) {
+            throw new UserLoginAlreadyExistException();
         }
+
+        if (userValidator.isValidate(user)) {
+            userDao.saveUser(user);
+            return true;
+        }
+
         return false;
     }
+
 
     private boolean isLoginAlreadyExist(String login) {
         User user = getUserByLogin(login);
@@ -55,11 +53,11 @@ public class UserServiceImpl implements UserService {
         return user != null;
     }
 
-    public void removeUserById(Long userId) throws IOException {
+    public void removeUserById(Long userId) {
         userDao.removeUserById(userId);
     }
 
-    public User getUserById(Long userId) throws IOException {
+    public User getUserById(Long userId) {
         List<User> users = getAllUsers();
 
         for (User user : users
@@ -75,20 +73,15 @@ public class UserServiceImpl implements UserService {
     }
 
     public User getUserByLogin(String login) {
-        List<User> users = null;
+        List<User> users = getAllUsers();
 
-        try {
-            users = getAllUsers();
-            for (User user : users
-                    ) {
-                boolean isFoundUser = user.getLogin().equals(login);
-                if (isFoundUser) {
-                    return user;
-                }
-
+        for (User user : users
+                ) {
+            boolean isFoundUser = user.getLogin().equals(login);
+            if (isFoundUser) {
+                return user;
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+
         }
 
         return null;

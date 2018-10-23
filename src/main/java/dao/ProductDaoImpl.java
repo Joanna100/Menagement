@@ -30,7 +30,6 @@ public class ProductDaoImpl implements ProductDao {
         return instance;
     }
 
-
     public void saveProduct(Product product) throws IOException {
         List<Product> products = getAllProducts();
         products.add(product);

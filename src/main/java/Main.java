@@ -1,7 +1,4 @@
-import api.ProductDao;
-import api.ProductService;
-import api.UserDao;
-import api.UserRegisterLoginFacade;
+import api.*;
 import dao.ProductDaoImpl;
 import dao.UserDaoImpl;
 import entity.Boots;
@@ -14,6 +11,7 @@ import entity.enums.SkinType;
 import entity.parser.ColorParser;
 import entity.parser.MaterialParser;
 import entity.parser.SkinParser;
+import facade.ProductFacadeImpl;
 import facade.UserRegisterLoginFacadeImpl;
 import service.ProductServiceImpl;
 
@@ -35,7 +33,9 @@ public class Main {
 
     public static void loggedMenu() {
         System.out.println("MANAGEMENT MENU");
-        System.out.println("1 - Dodaj nowy product");
+        System.out.println("1 - Dodaj nowy produkt");
+        System.out.println("2 - Usuń produkt");
+        System.out.println("3 - Wyświetl dostepne produkty");
         System.out.println("0 - Wyloguj się");
     }
 
@@ -135,7 +135,7 @@ public class Main {
 
     public static void main(String[] args) {
         UserRegisterLoginFacade userFacade = UserRegisterLoginFacadeImpl.getInstance();
-        ProductService productService = ProductServiceImpl.getInstance();
+        ProductFacade productFacade = ProductFacadeImpl.getInstance();
         boolean appOn = true;
         boolean loggedOn = false;
         int read;
@@ -163,11 +163,7 @@ public class Main {
                     System.out.println("Podaj hasło:");
                     String passwordReg = scanner.next();
                     User user = new User(1L, loginReg, passwordReg);
-                    if (userFacade.registerUser(user)) {
-                        System.out.println("Zarejestrowałeś się!");
-                    } else {
-                        System.out.println("Cos poszło nie tak!");
-                    }
+                    userFacade.registerUser(user);
                     break;
                 case 0:
                     appOn = false;
@@ -195,14 +191,17 @@ public class Main {
                                 product = createOtherProduct();
                                 break;
                         }
-                        if (productService.saveProduct(product)) {
-                            System.out.println("Produkt został utworzony");
-                        } else {
-                            System.out.println("Produkt nie został utworzony.");
-                        }
+                        System.out.println(productFacade.createProduct(product));
                         break;
-
-
+                    case 2:
+                        System.out.println("Dostępne produkty: " + productFacade.getAllProducts());
+                        System.out.println("Podaj nazwę produktu do usunięcia: ");
+                        String productName = scanner.next();
+                        System.out.println(productFacade.removeProduct(productName));
+                        break;
+                    case 3:
+                        System.out.println("Dostępne produkty: " + productFacade.getAllProducts());
+                        break;
                     case 0:
                         loggedOn = false;
                         break;
